@@ -1909,6 +1909,8 @@ static void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 			se->conn.capable |= FUSE_CAP_HANDLE_KILLPRIV;
 		if (arg->flags & FUSE_NO_OPENDIR_SUPPORT)
 			se->conn.capable |= FUSE_CAP_NO_OPENDIR_SUPPORT;
+		if (arg->flags & FUSE_CACHE_SYMLINKS) 
+			se->conn.capable |= FUSE_CAP_CACHE_SYMLINKS;
 	} else {
 		se->conn.max_readahead = 0;
 	}
@@ -2013,6 +2015,9 @@ static void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 		outarg.flags |= FUSE_WRITEBACK_CACHE;
 	if (se->conn.want & FUSE_CAP_POSIX_ACL)
 		outarg.flags |= FUSE_POSIX_ACL;
+	if (se->conn.want & FUSE_CAP_CACHE_SYMLINKS)
+		outarg.flags |= FUSE_CACHE_SYMLINKS;
+
 	outarg.max_readahead = se->conn.max_readahead;
 	outarg.max_write = se->conn.max_write;
 	if (se->conn.proto_minor >= 13) {

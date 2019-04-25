@@ -335,6 +335,9 @@ struct fuse_loop_config {
  */
 #define FUSE_CAP_HANDLE_KILLPRIV         (1 << 20)
 
+
+#define FUSE_CAP_CACHE_SYMLINKS         (1 << 23)
+
 /**
  * Indicates support for zero-message opendirs. If this flag is set in
  * the `capable` field of the `fuse_conn_info` structure, then the filesystem
